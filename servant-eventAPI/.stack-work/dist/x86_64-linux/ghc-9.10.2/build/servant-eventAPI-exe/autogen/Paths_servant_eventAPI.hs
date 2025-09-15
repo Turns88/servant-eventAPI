@@ -47,7 +47,7 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 bindir     = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/bin"
-libdir     = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/lib/x86_64-linux-ghc-9.10.2-aac9/servant-eventAPI-0.1.0.0-2M2Vg8rQFia8MwvBK0mVHL-servant-eventAPI-exe"
+libdir     = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/lib/x86_64-linux-ghc-9.10.2-aac9/servant-eventAPI-0.1.0.0-6hJZsxyIPVn5GIgtK6HlLY-servant-eventAPI-exe"
 dynlibdir  = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/lib/x86_64-linux-ghc-9.10.2-aac9"
 datadir    = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/share/x86_64-linux-ghc-9.10.2-aac9/servant-eventAPI-0.1.0.0"
 libexecdir = "/home/paul/Projects/Github/servant-eventAPI/servant-eventAPI/.stack-work/install/x86_64-linux/918fbdf135b04c3bb9495fe348df373bb7fbf53cf9c910ceeea934e81f56ffed/9.10.2/libexec/x86_64-linux-ghc-9.10.2-aac9/servant-eventAPI-0.1.0.0"

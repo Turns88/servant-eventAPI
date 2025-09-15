@@ -40,6 +40,16 @@
   (major1) == 0 && (major2) <  0 || \
   (major1) == 0 && (major2) == 0 && (minor) <= 11)
 #endif /* MIN_VERSION_bcrypt */
+/* package bytestring-0.12.2.0 */
+#ifndef VERSION_bytestring
+#define VERSION_bytestring "0.12.2.0"
+#endif /* VERSION_bytestring */
+#ifndef MIN_VERSION_bytestring
+#define MIN_VERSION_bytestring(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  12 || \
+  (major1) == 0 && (major2) == 12 && (minor) <= 2)
+#endif /* MIN_VERSION_bytestring */
 /* package servant-eventAPI-0.1.0.0 */
 #ifndef VERSION_servant_eventAPI
 #define VERSION_servant_eventAPI "0.1.0.0"
@@ -183,7 +193,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "servant-eventAPI-0.1.0.0-2M2Vg8rQFia8MwvBK0mVHL-servant-eventAPI-exe"
+#define CURRENT_COMPONENT_ID "servant-eventAPI-0.1.0.0-6hJZsxyIPVn5GIgtK6HlLY-servant-eventAPI-exe"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

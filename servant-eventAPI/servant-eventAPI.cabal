@@ -37,6 +37,7 @@ library
       aeson
     , base >=4.7 && <5
     , bcrypt
+    , bytestring
     , servant-server
     , sqlite-simple
     , wai
@@ -56,6 +57,7 @@ executable servant-eventAPI-exe
       aeson
     , base
     , bcrypt
+    , bytestring
     , servant-eventAPI
     , servant-server
     , sqlite-simple
@@ -77,6 +79,7 @@ test-suite servant-eventAPI-test
       aeson
     , base
     , bcrypt
+    , bytestring
     , hspec
     , hspec-wai
     , hspec-wai-json

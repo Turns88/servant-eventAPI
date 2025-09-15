@@ -27,6 +27,7 @@ dependencies:
 - warp
 - sqlite-simple
 - bcrypt
+- bytestring
 
 ghc-options:
 - -Wall
