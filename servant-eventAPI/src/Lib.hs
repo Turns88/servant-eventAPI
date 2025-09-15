@@ -57,4 +57,4 @@ server :: Server API
 server = getUsers :<|> createUser
   where
     getUsers = return users
-    createUser user = return (UserCreationMsg {message = "user successfully created"})
+    createUser user = return (UserCreationMsg {message = "user successfully created!"})
