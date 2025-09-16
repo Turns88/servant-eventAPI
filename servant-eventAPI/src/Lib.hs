@@ -10,10 +10,11 @@ module Lib
   )
 where
 
-import Crypto.BCrypt
 import Data.Aeson
 import Data.Aeson.TH
 import qualified Data.ByteString as BS
+import Data.Password.Bcrypt
+import Data.Text
 import Database.SQLite.Simple
 import GHC.Generics
 import Network.Wai
@@ -53,8 +54,18 @@ api = Proxy
 users :: [User]
 users = []
 
+-- Store in DB
+
 server :: Server API
 server = getUsers :<|> createUser
   where
     getUsers = return users
-    createUser user = return (UserCreationMsg {message = "user successfully created!"})
+    createUser user = do
+      passwordHash <- hashPassword (mkPassword (Data.Text.pack (userPassword user)))
+      let query = "INSERT INTO 'User' VALUES (userId user, userEmail user, passwordHash)"
+
+      return
+        ( UserCreationMsg
+            { message = userEmail user ++ " successfully created!"
+            }
+        )
