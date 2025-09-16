@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators #-}
 
@@ -10,6 +11,7 @@ module Lib
   )
 where
 
+import Control.Monad.IO.Class (liftIO)
 import Data.Aeson
 import Data.Aeson.TH
 import qualified Data.ByteString as BS
@@ -42,11 +44,10 @@ data UserCreationMsg = UserCreationMsg
 
 instance ToJSON UserCreationMsg
 
-startApp :: IO ()
-startApp = run 8080 app
-
-app :: Application
-app = serve api server
+-- app :: Application
+-- app = serve api server
+app :: Connection -> Application
+app conn = serve api (server conn)
 
 api :: Proxy API
 api = Proxy
@@ -56,16 +57,24 @@ users = []
 
 -- Store in DB
 
-server :: Server API
-server = getUsers :<|> createUser
+server :: Connection -> Server API
+server conn = getUsers :<|> createUser
   where
     getUsers = return users
     createUser user = do
       passwordHash <- hashPassword (mkPassword (Data.Text.pack (userPassword user)))
-      let query = "INSERT INTO 'User' VALUES (userId user, userEmail user, passwordHash)"
+      let hashText = unPasswordHash passwordHash
+      let query = "INSERT INTO User VALUES (?,?,?)"
+      result <- liftIO $ execute conn query (userId user, Data.Text.pack (userEmail user), hashText)
 
       return
         ( UserCreationMsg
             { message = userEmail user ++ " successfully created!"
             }
         )
+
+startApp :: IO ()
+startApp = do
+  conn <- open "servant-eventDB"
+  -- run 8080 app (server conn)
+  run 8080 (serve api (server conn))
