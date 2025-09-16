@@ -32,7 +32,7 @@ data User = User
 
 $(deriveJSON defaultOptions ''User)
 
-type GetUsers = "users" :> Get '[JSON] [User]
+type GetUsers = "users" :> Get '[JSON] [String]
 
 type CreateUser = "users" :> ReqBody '[JSON] User :> PostCreated '[JSON] UserCreationMsg
 
@@ -45,7 +45,6 @@ data UserCreationMsg = UserCreationMsg
 instance ToJSON UserCreationMsg
 
 -- app :: Application
--- app = serve api server
 app :: Connection -> Application
 app conn = serve api (server conn)
 
@@ -60,7 +59,13 @@ users = []
 server :: Connection -> Server API
 server conn = getUsers :<|> createUser
   where
-    getUsers = return users
+    getUsers :: Handler [String]
+    getUsers = do
+      let getUserQuery = "SELECT userEmail FROM User"
+      result <- liftIO $ query_ conn getUserQuery
+      let emails = Prelude.map fromOnly result
+      return emails
+
     createUser user = do
       passwordHash <- hashPassword (mkPassword (Data.Text.pack (userPassword user)))
       let hashText = unPasswordHash passwordHash
