@@ -30,16 +30,6 @@
   (major1) == 4 && (major2) <  20 || \
   (major1) == 4 && (major2) == 20 && (minor) <= 1)
 #endif /* MIN_VERSION_base */
-/* package bcrypt-0.0.11 */
-#ifndef VERSION_bcrypt
-#define VERSION_bcrypt "0.0.11"
-#endif /* VERSION_bcrypt */
-#ifndef MIN_VERSION_bcrypt
-#define MIN_VERSION_bcrypt(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  0 || \
-  (major1) == 0 && (major2) == 0 && (minor) <= 11)
-#endif /* MIN_VERSION_bcrypt */
 /* package bytestring-0.12.2.0 */
 #ifndef VERSION_bytestring
 #define VERSION_bytestring "0.12.2.0"
@@ -50,6 +40,16 @@
   (major1) == 0 && (major2) <  12 || \
   (major1) == 0 && (major2) == 12 && (minor) <= 2)
 #endif /* MIN_VERSION_bytestring */
+/* package password-3.1.0.1 */
+#ifndef VERSION_password
+#define VERSION_password "3.1.0.1"
+#endif /* VERSION_password */
+#ifndef MIN_VERSION_password
+#define MIN_VERSION_password(major1,major2,minor) (\
+  (major1) <  3 || \
+  (major1) == 3 && (major2) <  1 || \
+  (major1) == 3 && (major2) == 1 && (minor) <= 0)
+#endif /* MIN_VERSION_password */
 /* package servant-eventAPI-0.1.0.0 */
 #ifndef VERSION_servant_eventAPI
 #define VERSION_servant_eventAPI "0.1.0.0"
@@ -80,6 +80,26 @@
   (major1) == 0 && (major2) <  4 || \
   (major1) == 0 && (major2) == 4 && (minor) <= 19)
 #endif /* MIN_VERSION_sqlite_simple */
+/* package text-2.1.2 */
+#ifndef VERSION_text
+#define VERSION_text "2.1.2"
+#endif /* VERSION_text */
+#ifndef MIN_VERSION_text
+#define MIN_VERSION_text(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  1 || \
+  (major1) == 2 && (major2) == 1 && (minor) <= 2)
+#endif /* MIN_VERSION_text */
+/* package uuid-1.3.16 */
+#ifndef VERSION_uuid
+#define VERSION_uuid "1.3.16"
+#endif /* VERSION_uuid */
+#ifndef MIN_VERSION_uuid
+#define MIN_VERSION_uuid(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  3 || \
+  (major1) == 1 && (major2) == 3 && (minor) <= 16)
+#endif /* MIN_VERSION_uuid */
 /* package wai-3.2.4 */
 #ifndef VERSION_wai
 #define VERSION_wai "3.2.4"
@@ -193,7 +213,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "servant-eventAPI-0.1.0.0-6hJZsxyIPVn5GIgtK6HlLY-servant-eventAPI-exe"
+#define CURRENT_COMPONENT_ID "servant-eventAPI-0.1.0.0-8IJQQWsmzaTLCyKnAFoYGs-servant-eventAPI-exe"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

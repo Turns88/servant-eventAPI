@@ -25,6 +25,7 @@ import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
 
+-- DATA TYPES
 data NewUser = NewUser
   { newUserEmail :: String,
     newUserPassword :: String
@@ -34,7 +35,7 @@ data NewUser = NewUser
 instance FromJSON NewUser
 
 data User = User
-  { userId :: Int,
+  { userId :: String,
     userEmail :: String,
     userPassword :: String
   }
@@ -42,6 +43,16 @@ data User = User
 
 $(deriveJSON defaultOptions ''User)
 
+data Event = Event
+  { eventName :: String,
+    eventDescription :: String,
+    eventLocation :: String
+  }
+  deriving (Eq, Show, Generic)
+
+instance FromJSON Event
+
+-- Routes
 type GetUsers = "users" :> Get '[JSON] [String]
 
 type CreateUser = "users" :> ReqBody '[JSON] NewUser :> PostCreated '[JSON] UserCreationMsg
@@ -61,9 +72,6 @@ app conn = serve api (server conn)
 api :: Proxy API
 api = Proxy
 
-users :: [User]
-users = []
-
 -- Store in DB
 
 server :: Connection -> Server API
@@ -81,7 +89,7 @@ server conn = getUsers :<|> createUser
       newUUID <- liftIO $ nextRandom
       passwordHash <- hashPassword (mkPassword (Data.Text.pack (newUserPassword user)))
       let hashText = unPasswordHash passwordHash
-      let query = "INSERT INTO User VALUES (?,?,?)"
+      let query = "INSERT INTO user VALUES (?,?,?)"
       result <- liftIO $ execute conn query (UUID.toText newUUID, Data.Text.pack (newUserEmail user), hashText)
 
       return
