@@ -17,11 +17,21 @@ import Data.Aeson.TH
 import qualified Data.ByteString as BS
 import Data.Password.Bcrypt
 import Data.Text
+import qualified Data.UUID as UUID
+import Data.UUID.V4 (nextRandom)
 import Database.SQLite.Simple
 import GHC.Generics
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
+
+data NewUser = NewUser
+  { newUserEmail :: String,
+    newUserPassword :: String
+  }
+  deriving (Eq, Show, Generic)
+
+instance FromJSON NewUser
 
 data User = User
   { userId :: Int,
@@ -34,7 +44,7 @@ $(deriveJSON defaultOptions ''User)
 
 type GetUsers = "users" :> Get '[JSON] [String]
 
-type CreateUser = "users" :> ReqBody '[JSON] User :> PostCreated '[JSON] UserCreationMsg
+type CreateUser = "users" :> ReqBody '[JSON] NewUser :> PostCreated '[JSON] UserCreationMsg
 
 type API = GetUsers :<|> CreateUser
 
@@ -67,14 +77,16 @@ server conn = getUsers :<|> createUser
       return emails
 
     createUser user = do
-      passwordHash <- hashPassword (mkPassword (Data.Text.pack (userPassword user)))
+      -- generate uuid
+      newUUID <- liftIO $ nextRandom
+      passwordHash <- hashPassword (mkPassword (Data.Text.pack (newUserPassword user)))
       let hashText = unPasswordHash passwordHash
       let query = "INSERT INTO User VALUES (?,?,?)"
-      result <- liftIO $ execute conn query (userId user, Data.Text.pack (userEmail user), hashText)
+      result <- liftIO $ execute conn query (UUID.toText newUUID, Data.Text.pack (newUserEmail user), hashText)
 
       return
         ( UserCreationMsg
-            { message = userEmail user ++ " successfully created!"
+            { message = newUserEmail user ++ " successfully created!"
             }
         )
 
